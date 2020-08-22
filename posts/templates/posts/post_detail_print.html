@@ -1,0 +1,13 @@
+{% load wagtailimages_tags %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ postdetailpage.title }}</title>
+</head>
+<body class="padding-0">
+    <h4 class="center margin-0">{{ postdetailpage.title }}</h4>
+    <br>
+    <div class="text-indention margin-0">{{ postdetailpage.body|safe }}</div>
+</body>
+</html>

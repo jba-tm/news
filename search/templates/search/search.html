@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static i18n wagtailcore_tags %}
+
+{% block breadcrumb-title %}
+    {% trans 'Search' %} - {{ request.GET.query }}
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="ibox-content">
+        <div class="search-form">
+            <form method="get" action="{% url 'search' %}">
+                <div class="input-group">
+                    <input type="search" placeholder="{% trans 'Search' %}"
+                           name="query" value="{{ request.GET.search }}" autocomplete="off"
+                           class="form-control form-control-lg">
+                    <div class="input-group-append">
+                        <button class="btn btn-lg btn-primary" type="submit">
+                            {% trans 'Search' %}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <ul class="list-group elements-list mt-2">
+            {% for post in posts %}
+                    <li class="list-group-item">
+
+                        <div class="btn-group float-right">
+                            <a href="{% url 'post-detail-pdf' post.slug %}" class="btn btn-white btn-sm" title="{% trans 'PDF' %}"><i class="fa fa-file-pdf"></i> {% trans 'PDF' %}</a>
+                            <a href="{% pageurl post %}" class="btn btn-white btn-sm" title="{% trans 'View' %}"><i class="fa fa-folder"></i> {% trans 'View' %}</a>
+                        </div>
+
+                        <a href="{% pageurl post %}" class="nav-link">
+                            <h3 class="text-break">{{ post.title }}</h3>
+                            <div class="pt-2 display-first-child">
+                                {{ post.specific.body|richtext }}
+                            </div>
+
+                            <i class="fa fa-clock"></i> {{ post.specific.latest_revision_created_at}}
+                        </a>
+                    </li>
+
+
+            {% empty %}
+                {% trans 'Empty news list' %}
+            {% endfor %}
+        </ul>
+        <div class="hr-line-dashed"></div>
+        {% include 'core/include/pagination_show_all_page_number.html' with page_obj=posts %}
+    </div>
+{% endblock content %}
+
+
+<e>  </e>

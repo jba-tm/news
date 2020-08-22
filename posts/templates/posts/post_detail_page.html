@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% load static i18n wagtailcore_tags %}
+
+{% block extra_css %}
+    <style>
+        p {
+            margin: 0;
+            text-align: justify;
+            font-family: Times New Roman, serif;
+        }
+    </style>
+{% endblock %}
+
+{% block breadcrumb-title %}
+    {{ page.title }}
+{% endblock %}
+
+{% block breadcrumb-item %}
+
+    <li class="breadcrumb-item active">
+        <strong>{{ page.title }}</strong>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="ibox-title p-2">
+        <div class="btn-group float-right">
+            <a href="{% url 'post-detail-pdf' page.slug %}" class="btn btn-white btn-sm" title="{% trans 'PDF' %}"><i class="fa fa-file-pdf"></i> {% trans 'PDF' %}</a>
+        </div>
+    </div>
+    <div class="ibox-content">
+        <div class="text-center article-title">
+            <span class="text-muted"><i class="fa fa-clock-o"></i>{{ page.latest_revision_created_at }}</span>
+            <h1>
+                {{ page.title }}
+            </h1>
+        </div>
+        {{ page.body|richtext }}
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <h5>{% trans 'Stats:' %}</h5>
+                <div class="small">{% trans 'Publish time' %}: {{ page.last_published_at|date:"d.m.Y H:i" }}</div>
+            </div>
+            <div class="col-md-6">
+                <div class="small text-right">
+                    <h5>{% trans 'Site stats:' %}</h5>
+                    <div>{{ page.datetime_on_site|date:'d.m.Y H:i' }}</div>
+                <div class="small">{% trans 'Site' %}: {{ page.site }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
