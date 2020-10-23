@@ -16,19 +16,12 @@ class PostDetailPage(Page, SoftDeletionModel):
     subpage_types = []
 
     body = RichTextField(verbose_name=_('Body'), help_text=_('Content body'),)
-    datetime_on_site = models.DateTimeField(null=True, verbose_name=_('Content datetime'),
-                                            help_text=_('Published datetime on the site'))
 
     search_fields = Page.search_fields + [
         index.SearchField('body'),
-        index.FilterField('datetime_on_site'),
     ]
 
     content_panels = Page.content_panels + [
-        MultiFieldPanel([
-            FieldPanel('datetime_on_site', widget=AdminDateTimeInput(attrs={'autocomplete': 'off', },)),
-        ], heading=_('Post information'), help_text=_('Post information')),
-
         FieldPanel('body', classname="full"),
     ]
 
