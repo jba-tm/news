@@ -5,9 +5,9 @@ from .models import PostDetailPage
 
 
 class PostDetailPageAdmin(admin.ModelAdmin):
-    list_display = ('title', 'body', 'datetime_on_site', 'site')
+    list_display = ('title', 'body', 'datetime_on_site', )
     list_display_links = ['title']
-    search_fields = ('title', 'body', 'datetime_on_site', 'site')
+    search_fields = ('title', 'body', 'datetime_on_site', )
 
 
 admin.site.register(PostDetailPage, PostDetailPageAdmin)

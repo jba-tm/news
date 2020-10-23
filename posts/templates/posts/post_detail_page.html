@@ -43,13 +43,6 @@
                 <h5>{% trans 'Stats:' %}</h5>
                 <div class="small">{% trans 'Publish time' %}: {{ page.last_published_at|date:"d.m.Y H:i" }}</div>
             </div>
-            <div class="col-md-6">
-                <div class="small text-right">
-                    <h5>{% trans 'Site stats:' %}</h5>
-                    <div>{{ page.datetime_on_site|date:'d.m.Y H:i' }}</div>
-                <div class="small">{% trans 'Site' %}: {{ page.site }}</div>
-                </div>
-            </div>
         </div>
     </div>
 {% endblock %}
