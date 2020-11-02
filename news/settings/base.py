@@ -12,7 +12,24 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import json
+from pathlib import Path
+
+
+from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext_lazy as _
+
+with open(os.path.join(os.path.dirname(__file__), 'secrets.json'), 'r') as f:
+    secrets = json.loads(f.read())
+
+
+def get_secret(setting):
+    """Get the secret variable or return explicit exception"""
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = f'Set the {setting} environment variable'
+        raise ImproperlyConfigured(error_msg)
 
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,6 +57,7 @@ INSTALLED_APPS = [
     'wagtail.search',
     'wagtail.admin',
     'wagtail.core',
+    'wagtail.api.v2',
 
     'modelcluster',
     'taggit',
@@ -52,7 +70,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Package applications
-    'axes',
+    'rest_framework',
     'weasyprint',
 
     # Custom applications
@@ -74,21 +92,6 @@ MIDDLEWARE = [
 
     'news.apps.core.middleware.OnlineNowMiddleware',
     'news.apps.core.middleware.PreventConcurrentLoginMiddleware',
-
-    # AxesMiddleware should be the last middleware in the MIDDLEWARE list.
-    # It only formats user lockout messages and renders Axes lockout responses
-    # on failed user authentication attempts from login views.
-    # If you do not want Axes to override the authentication response
-    # you can skip installing the middleware and use your own views.
-    'axes.middleware.AxesMiddleware',
-]
-
-AUTHENTICATION_BACKENDS = [
-    # AxesBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
-    'axes.backends.AxesBackend',
-
-    # Django ModelBackend is the default authentication backend.
-    'django.contrib.auth.backends.ModelBackend',
 ]
 
 ROOT_URLCONF = 'news.urls'
@@ -119,21 +122,21 @@ WSGI_APPLICATION = 'news.wsgi.application'
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
     # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'news',
-    #     'USER': 'root',
-    #     'PASSWORD': "",
-    #     'HOST': "",
-    #     'PORT': "",
-    #     'OPTIONS': {
-    #         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-    #     }
-    # }
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # },
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': get_secret('DATABASE_NAME'),
+        'USER': get_secret('DATABASE_USER'),
+        'PASSWORD': get_secret('DATABASE_PASSWORD'),
+        'HOST': get_secret('DATABASE_HOST'),
+        'PORT': get_secret('DATABASE_PORT'),
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
+    },
 }
 
 WAGTAILSEARCH_BACKENDS = {
@@ -236,9 +239,6 @@ WAGTAIL_PASSWORD_RESET_ENABLED = False
 WAGTAILADMIN_USER_LOGIN_FORM = 'news.apps.core.forms.AppLoginForm'
 WAGTAIL_USER_EDIT_FORM = 'news.apps.core.forms.CustomUserEditForm'
 WAGTAIL_USER_CREATION_FORM = 'news.apps.core.forms.CustomUserCreationForm'
-
-# WAGTAIL_DATE_FORMAT = '%d.%m.%Y'
-# WAGTAIL_DATETIME_FORMAT = '%d.%m.%Y %H:%M'
 
 WAGTAILADMIN_RICH_TEXT_EDITORS = {
     'default': {

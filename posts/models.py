@@ -1,5 +1,6 @@
 # import pytz
 from django.db import models
+from wagtail.api import APIField
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
@@ -23,6 +24,11 @@ class PostDetailPage(Page, SoftDeletionModel):
 
     content_panels = Page.content_panels + [
         FieldPanel('body', classname="full"),
+    ]
+
+    api_fields = [
+        APIField('last_published_at'),
+        APIField('body'),
     ]
 
     class Meta:

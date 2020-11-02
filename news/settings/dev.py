@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 DEBUG = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '21a-f=x6$n7pxi4+e@m)7&be5squh@0y)lxx5ol7iv5ig_lye#'
+SECRET_KEY = get_secret('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: define the correct hosts in production!
 ALLOWED_HOSTS = ['*']

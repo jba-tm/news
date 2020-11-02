@@ -31,6 +31,3 @@ db.sqlite3
 !/media/.gitkeep
 /static/
 !/static/.gitkeep
-
-# Secrets
-secrets.json
