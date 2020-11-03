@@ -22,7 +22,7 @@ urlpatterns = [
                                      form_class=AppLoginForm, redirect_authenticated_user=True), name='login'),
     path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
 
-    path('content/', include('posts.urls')),
+    path('post/', include('posts.urls')),
 
 ]
 
