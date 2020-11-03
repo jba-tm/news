@@ -75,7 +75,6 @@ INSTALLED_APPS = [
 
     # Custom applications
     'posts',
-    'news.apps.core',
 ]
 
 MIDDLEWARE = [
@@ -90,8 +89,6 @@ MIDDLEWARE = [
     # 'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 
-    'news.apps.core.middleware.OnlineNowMiddleware',
-    'news.apps.core.middleware.PreventConcurrentLoginMiddleware',
 ]
 
 ROOT_URLCONF = 'news.urls'
