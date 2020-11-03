@@ -22,8 +22,6 @@ class CustomUserEditForm(UserEditForm):
         self.fields['first_name'].widget.attrs['autocomplete'] = 'off'
         self.fields['last_name'].widget.attrs['autocomplete'] = 'off'
 
-    email = forms.EmailField(required=False, label=_('Email'))
-
 
 class CustomUserCreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
@@ -32,5 +30,3 @@ class CustomUserCreationForm(UserCreationForm):
         self.fields['username'].widget.attrs['autocomplete'] = 'off'
         self.fields['first_name'].widget.attrs['autocomplete'] = 'off'
         self.fields['last_name'].widget.attrs['autocomplete'] = 'off'
-
-    email = forms.EmailField(required=False, label=_('Email'))

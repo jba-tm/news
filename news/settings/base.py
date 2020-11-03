@@ -235,7 +235,6 @@ WAGTAIL_FRONTEND_LOGIN_TEMPLATE = 'core/login.html'
 
 WAGTAIL_PASSWORD_RESET_ENABLED = False
 
-
 WAGTAILADMIN_USER_LOGIN_FORM = 'news.apps.core.forms.AppLoginForm'
 WAGTAIL_USER_EDIT_FORM = 'news.apps.core.forms.CustomUserEditForm'
 WAGTAIL_USER_CREATION_FORM = 'news.apps.core.forms.CustomUserCreationForm'
@@ -249,19 +248,15 @@ WAGTAILADMIN_RICH_TEXT_EDITORS = {
     },
 }
 
+WAGTAILADMIN_GLOBAL_PAGE_EDIT_LOCK = True
+
 
 # Session settings
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
-SESSION_COOKIE_AGE = 5 * 60
-
 SESSION_COOKIE_SAMESITE = 'Strict'
 
 SESSION_SAVE_EVERY_REQUEST = True
-
-WAGTAILADMIN_GLOBAL_PAGE_EDIT_LOCK = True
 
 
 # Logging settings
