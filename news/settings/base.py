@@ -118,21 +118,21 @@ WSGI_APPLICATION = 'news.wsgi.application'
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
     # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': get_secret('DATABASE_NAME'),
-    #     'USER': get_secret('DATABASE_USER'),
-    #     'PASSWORD': get_secret('DATABASE_PASSWORD'),
-    #     'HOST': get_secret('DATABASE_HOST'),
-    #     'PORT': get_secret('DATABASE_PORT'),
-    #     'OPTIONS': {
-    #         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-    #     }
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     # },
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': get_secret('DATABASE_NAME'),
+        'USER': get_secret('DATABASE_USER'),
+        'PASSWORD': get_secret('DATABASE_PASSWORD'),
+        'HOST': get_secret('DATABASE_HOST'),
+        'PORT': get_secret('DATABASE_PORT'),
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
+    },
 }
 
 WAGTAILSEARCH_BACKENDS = {
@@ -245,6 +245,8 @@ WAGTAILADMIN_RICH_TEXT_EDITORS = {
 }
 
 WAGTAILADMIN_GLOBAL_PAGE_EDIT_LOCK = True
+
+WAGTAILAPI_BASE_URL = 'https://superpythonanywhere1234321.pythonanywhere.com/'
 
 
 # Session settings
