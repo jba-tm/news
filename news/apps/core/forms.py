@@ -1,7 +1,5 @@
-from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from wagtail.users.forms import UserCreationForm, UserEditForm
-from django.utils.translation import ugettext_lazy as _
 
 ##############
 # User forms #

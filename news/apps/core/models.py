@@ -3,7 +3,7 @@ from datetime import timedelta
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import QuerySet
@@ -97,6 +97,9 @@ class PaginationPage(Page):
         # in order to access child properties, such as youtube_video_id and subtitle
         context[self.context_pagination_name] = context_pages
         return context
+
+    class Meta:
+        abstract = True
 
 ###############
 # Soft delete #

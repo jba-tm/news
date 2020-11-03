@@ -1,18 +1,14 @@
-# import pytz
-from django.db import models
 from wagtail.api import APIField
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.search import index
 from django.utils.translation import ugettext_lazy as _
-from wagtail.admin.widgets import AdminDateTimeInput
 from wagtail.contrib.forms.models import AbstractForm
-from news.apps.core.models import SoftDeletionModel
 # Create your models here.
 
 
-class PostDetailPage(Page, SoftDeletionModel):
+class PostDetailPage(Page):
     parent_page_types = ['home.HomePage']
     subpage_types = []
 
