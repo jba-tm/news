@@ -18,8 +18,7 @@ class PostDetailView(SuccessMessageMixin, DetailView):
     # def get_context_data(self, **kwargs):
 
 
-class PostDetailPrintView(LoginRequiredMixin, PermissionRequiredMixin, WeasyTemplateResponseMixin, PostDetailView):
-    permission_required = ('post.save_post_as_pdf', )
+class PostDetailPrintView(WeasyTemplateResponseMixin, PostDetailView):
     pdf_filename = 'example.pdf'
     template_name = 'posts/post_detail_print.html'
     # output of MyModelView rendered as PDF with hardcoded CSS
