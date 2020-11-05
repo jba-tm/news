@@ -49,13 +49,19 @@
                 </div>
             </form>
         </div>
+
             <ul class="nav navbar-top-links navbar-right">
-
-
                 <li>
+
+            {% if request.user.is_authenticated %}
                     <a href="{% url 'logout' %}">
                         <i class="fa fa-sign-out"></i> {% trans 'Log out' %}
                     </a>
+            {% else %}
+                    <a href="{% url 'login' %}">
+                        <i class="fa fa-sign-in"></i> {% trans 'Login' %}
+                    </a>
+            {% endif %}
                 </li>
             </ul>
 
